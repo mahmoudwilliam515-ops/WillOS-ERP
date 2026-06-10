@@ -1,4 +1,4 @@
-using EnterpriseERP.Application.Common.Interfaces.Services;
+﻿using EnterpriseERP.Application.Common.Interfaces.Services;
 using EnterpriseERP.Domain.Entities.SaaS;
 using System.Security.Claims;
 
@@ -24,17 +24,9 @@ public class TenantResolutionMiddleware
     {
         Guid? tenantId = null;
 
-        // Priority 1: X-Tenant-Id Header (API clients)
-        if (context.Request.Headers.ContainsKey("X-Tenant-Id"))
-        {
-            if (Guid.TryParse(context.Request.Headers["X-Tenant-Id"], out var headerTenantId))
-            {
-                tenantId = headerTenantId;
-                _logger.LogDebug("Tenant ID extracted from header: {TenantId}", tenantId);
-            }
-        }
-
-        // Priority 2: JWT Claim 'tenant_id'
+        // SECURITY FIX: Removed Header-based tenant resolution
+        // TenantId MUST come from JWT claims only
+        // Priority 1: JWT Claim 'tenant_id'
         if (tenantId == null && context.User?.Identity?.IsAuthenticated == true)
         {
             var tenantClaim = context.User.FindFirst("tenant_id");
@@ -85,3 +77,4 @@ public class TenantResolutionMiddleware
         return null;
     }
 }
+

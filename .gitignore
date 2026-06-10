@@ -1,0 +1,30 @@
+﻿# Build outputs
+**/bin/
+**/obj/
+**/logs/
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# User secrets & local config
+appsettings.Development.json
+
+# IDE
+.vscode/
+.vs/
+
+# Temp files
+*.log
+*.txt
+*.ps1
+scratch/
+temp_*/
+MigrationRunner/
+frontend/
+
+# Test artifacts
+**/TestResults/
+**/artifacts/
+tests/e2e/
+tests/pact/

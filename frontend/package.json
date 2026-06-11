@@ -1,0 +1,8 @@
+﻿{
+  "name": "willos-erp-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx serve dist -p 5173",
+    "build": "echo Already built"
+  }
+}
